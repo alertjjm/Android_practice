@@ -10,14 +10,15 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
+    ScrollView scrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView=(TextView)findViewById(R.id.textView);
-        ScrollView scrollView=(ScrollView)findViewById(R.id.scrollView);
+        scrollView=(ScrollView)findViewById(R.id.scrollView);
         scrollView.setVerticalScrollBarEnabled(true);
-        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+
         View view=(View)findViewById(R.id.view);
         view.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -27,10 +28,13 @@ public class MainActivity extends AppCompatActivity {
                 float cury=event.getY();
                 if(action==event.ACTION_DOWN){
                     println("손가락 눌림 : "+curx+", "+cury);
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                 }else if(action==event.ACTION_MOVE){
                     println("손가락 움직임 : "+curx+", "+cury);
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                 }else if(action==event.ACTION_UP){
                     println("손가락 뗌 : "+curx+", "+cury);
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                 }
                 return true;
             }
