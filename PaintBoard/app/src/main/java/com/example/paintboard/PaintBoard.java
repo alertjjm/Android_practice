@@ -71,4 +71,10 @@ public class PaintBoard extends View {
             canvas.drawBitmap(mBitmap, 0, 0, null);
         }
     }
+    public void setColor(int Color){
+        mPaint.setColor(Color);
+    }
+    public void setLineWidth(float lineWidth){
+        mPaint.setStrokeWidth(lineWidth);
+    }
 }
