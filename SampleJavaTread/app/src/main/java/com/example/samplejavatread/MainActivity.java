@@ -3,8 +3,11 @@ package com.example.samplejavatread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,12 +46,8 @@ public class MainActivity extends AppCompatActivity {
         requestDialog.setPositiveButton(titleButtonYes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                for(int k=0; k<10; k++){
-                    try{
-                        Thread.sleep(1000);
-                    }catch (InterruptedException ex){}
-                }
-                textView.setText("원격 데이터 요청 완료.");
+                RequestHandler handler=new RequestHandler();
+                handler.sendEmptyMessageDelayed(0,20);
             }
         });
         requestDialog.setNegativeButton(titleButtonNo, new DialogInterface.OnClickListener() {
@@ -58,5 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return requestDialog.show();
+    }
+    class RequestHandler extends Handler{
+        public void handleMessage(Message msg){
+            for(int k=0; k<10; k++){
+                try{
+                    Thread.sleep(1000);
+                }catch (InterruptedException ex){}
+            }
+            textView.setText("원격 데이터 요청 완료.");
+        }
     }
 }
