@@ -18,7 +18,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Double latitude;
     Double longitude;
+    MarkerOptions myLocationMarker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +111,18 @@ public class MainActivity extends AppCompatActivity {
         LatLng curPoint = new LatLng(location.getLatitude(), location.getLongitude());
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 18));
+        showMyLocationMarker(location);
     }
-
+    private void showMyLocationMarker(Location location){
+        if(myLocationMarker==null){
+            myLocationMarker=new MarkerOptions();
+            myLocationMarker.position(new LatLng(location.getLatitude(),location.getLongitude()));
+            myLocationMarker.title("내 위치");
+            myLocationMarker.snippet("GPS로 확인한 위치");
+            myLocationMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation));
+            map.addMarker(myLocationMarker);
+        }else{
+            myLocationMarker.position(new LatLng(location.getLatitude(),location.getLongitude()));
+        }
+    }
 }
