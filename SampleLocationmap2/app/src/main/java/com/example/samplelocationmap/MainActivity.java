@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     SupportMapFragment mapFragment;
     GoogleMap map;
+    Location location2;
     Button button;
     Double latitude;
     Double longitude;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestMyLocation();
+                showCurrentLocation(location2);
             }
         });
 
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private class GPSListener implements LocationListener {
         @Override
         public void onLocationChanged(Location location) {
+            location2=location;
             showCurrentLocation(location);
         }
         @Override
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         checkPermission();
         Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        location2=location;
         latitude=location.getLatitude();
         longitude=location.getLongitude();
         GPSListener gpsListener=new GPSListener();
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private void showCurrentLocation(Location location) {
         LatLng curPoint = new LatLng(location.getLatitude(), location.getLongitude());
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 18));
     }
 
 }
