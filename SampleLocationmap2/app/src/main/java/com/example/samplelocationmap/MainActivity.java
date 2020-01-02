@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             location2=location;
             showCurrentLocation(location);
+            showMyLocationMarker(location);
         }
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -120,9 +121,17 @@ public class MainActivity extends AppCompatActivity {
             myLocationMarker.title("내 위치");
             myLocationMarker.snippet("GPS로 확인한 위치");
             myLocationMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation));
+            myLocationMarker.draggable(true);
             map.addMarker(myLocationMarker);
         }else{
+            map.clear();
+            myLocationMarker.visible(false);
+            myLocationMarker=new MarkerOptions();
             myLocationMarker.position(new LatLng(location.getLatitude(),location.getLongitude()));
+            myLocationMarker.title("내 위치");
+            myLocationMarker.snippet("GPS로 확인한 위치");
+            myLocationMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation));
+            map.addMarker(myLocationMarker);
         }
     }
 }
