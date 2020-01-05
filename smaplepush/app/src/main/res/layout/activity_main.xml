@@ -6,18 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="인스턴스 id 확인하기" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textSize="30sp" />
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="수신메시지" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,4 +32,26 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="발신메시지"
+         />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="메시지 입력" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전송" />
 </LinearLayout>

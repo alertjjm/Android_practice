@@ -18,6 +18,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -27,21 +28,29 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    String myid;
     String channelId="channel";
     String channelName="Channel Name";
     private static final String TAG="MyMS";
     public MyFirebaseMessagingService() {
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        myid=FirebaseInstanceId.getInstance().getId();
+    }
+
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         Log.d(TAG,"onMessageReceived() 호출됨.");
         String from = remoteMessage.getFrom();
-        String contents=remoteMessage.getNotification().getBody();
-        String title=remoteMessage.getNotification().getTitle();
-        Log.d(TAG, "from : " + from + ", contents : " + contents);
-        sendToActivity(getApplicationContext(), from, contents);
-        mynotification(title,contents);
+            String contents=remoteMessage.getNotification().getBody();
+            String title=remoteMessage.getNotification().getTitle();
+            Log.d(TAG, "from : " + from + ", contents : " + contents);
+            sendToActivity(getApplicationContext(), from, contents);
+            mynotification(title,contents);
     }
     private void mynotification(String title,String contents){
         int importance=NotificationManager.IMPORTANCE_HIGH;
@@ -54,8 +63,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Intent notiintent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notiintent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),channelId);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),android.R.drawable.star_on));
-        builder.setSmallIcon(android.R.drawable.star_on);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.appicon));
+        builder.setSmallIcon(R.drawable.appicon);
         builder.setTicker("JJM");
         builder.setContentTitle(title);
         builder.setContentText(contents);
