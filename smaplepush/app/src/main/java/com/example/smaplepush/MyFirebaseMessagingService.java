@@ -32,6 +32,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     String channelId="channel";
     String channelName="Channel Name";
     private static final String TAG="MyMS";
+    String from;
     public MyFirebaseMessagingService() {
     }
 
@@ -45,7 +46,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         Log.d(TAG,"onMessageReceived() 호출됨.");
-        String from = remoteMessage.getFrom();
+            from = remoteMessage.getFrom();
             String contents=remoteMessage.getNotification().getBody();
             String title=remoteMessage.getNotification().getTitle();
             Log.d(TAG, "from : " + from + ", contents : " + contents);
