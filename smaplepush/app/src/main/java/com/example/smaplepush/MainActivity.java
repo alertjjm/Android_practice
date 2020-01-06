@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         if(num==0){
             return;
         }
-        else if(num<13){
+        else if(num<11){
             c=db.rawQuery("select * from message order by ID asc",null);
             while(c.moveToNext()){
                 String contents = c.getString(c.getColumnIndex("TEXTMESS"));
@@ -147,10 +147,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            c=db.rawQuery("select * from message where ID>"+Integer.toString(num-12)+"order by ID asc",null);
+            String ss="select * from message where ID > "+Integer.toString(num-10)+" order by ID asc;";
+            c=db.rawQuery(ss,null);
             while(c.moveToNext()){
                 String contents = c.getString(c.getColumnIndex("TEXTMESS"));
                 String dt=c.getString(c.getColumnIndex("DATETIME"));
+                //int n=c.getInt(c.getColumnIndex("ID"));
                 textView2.append(dt+": " + contents+"\n");
             }
         }

@@ -9,6 +9,7 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.BitmapFactory;
@@ -84,7 +85,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         SimpleDateFormat simpleDate=new SimpleDateFormat("MM월 dd일 hh:mm");
         Datetime=simpleDate.format(mDate);
         String cont=contents.replace("\'","\'\'");
-        String dbsql="insert into message (DATETIME,TEXTMESS) values ('"+Datetime+"', '"+cont+"')";
+        Cursor c = db.rawQuery("select * from message",null);
+        int nu=c.getCount();
+        nu=nu+1;
+        String dbsql="insert into message (ID,DATETIME,TEXTMESS) values ("+Integer.toString(nu)+", "+"'"+Datetime+"', '"+cont+"')";
         db.execSQL(dbsql);
         if(!isAppIsInBackground(getApplicationContext())){
             sendToActivity(getApplicationContext(), from, contents,Datetime);
