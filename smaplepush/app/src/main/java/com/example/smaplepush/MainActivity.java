@@ -3,8 +3,10 @@ package com.example.smaplepush;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -90,9 +92,28 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                db.execSQL("delete from message");
-                dbinitprocess();
-                Toast.makeText(getApplicationContext(),"메시지가 전체 삭제되었습니다.",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                builder.setTitle("전체 메시지 삭제").setMessage("삭제 하시겠습니까?");
+                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        db.execSQL("delete from message");
+                        dbinitprocess();
+                        Toast.makeText(getApplicationContext(),"메시지가 전체 삭제되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
         Button button = findViewById(R.id.button);

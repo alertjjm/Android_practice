@@ -57,16 +57,17 @@
     <Button
         android:id="@+id/button"
         android:layout_margin="5dp"
-        android:background="@drawable/backgroundgrad3"
+        android:background="@drawable/backgroundgrad2"
         android:layout_width="300dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:text="전송" />
 
     <Button
         android:id="@+id/button2"
         android:layout_margin="5dp"
-        android:background="@drawable/backgroundgrad4"
+        android:background="@drawable/backgroundgrad2"
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
