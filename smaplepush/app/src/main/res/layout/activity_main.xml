@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundgrad"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -15,10 +16,13 @@
         android:text="수신메시지" />
 
     <ScrollView
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/backgroundgrad2"
+
         android:layout_weight="2"
-        android:background="@android:color/holo_blue_bright">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +30,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_margin="5dp"
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,19 +49,25 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="메시지 입력" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/backgroundgrad3"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="전송" />
 
     <Button
         android:id="@+id/button2"
+        android:layout_margin="5dp"
+        android:background="@drawable/backgroundgrad4"
+        android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
